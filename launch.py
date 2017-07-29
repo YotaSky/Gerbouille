@@ -100,7 +100,7 @@ async def on_message(message):
         arkmap = []
         
         for x in os.listdir(folder):
-            if '.cfg' in x:
+            if x.endswith('.cfg'):
                 arkmap.append(x)
         
         for cfg in arkmap:
@@ -141,7 +141,7 @@ async def on_message(message):
         listmap = []
         namemap = []
         for x in os.listdir(folder):
-            if '.cfg' in x:
+            if x.endswith('.cfg'):
                 name = config(folder+x)['SessionName']
                 listmap.append('**!%s** - %s'%(x.split('.')[0],name))
                 namemap.append(x.split('.')[0])

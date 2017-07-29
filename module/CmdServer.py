@@ -59,7 +59,7 @@ class CmdServer(object):
         #Chargement Mod Map
         try:
             if self.config['serverMapModId']:
-                map_mod_id = '-mapmodid={}'.format(self.config['GameModIds'])
+                map_mod_id = '?MapModID={}'.format(self.config['serverMapModId'])
         except KeyError:
             map_mod_id = ''
 
@@ -67,31 +67,48 @@ class CmdServer(object):
         if result['error'] is False:
             start_cmd = "{my_binary} " \
                         "{map}" \
-                        "?GameModIds={mods}" \
-                        "?MaxPlayers={players}" \
-                        "?Port={listen_port}" \
-                        "?QueryPort={query_port}" \
+                        "{mapid}" \
                         "?RCONEnabled=True" \
                         "?RCONPort={rcon_port}" \
-                        "?ServerAdminPassword={adminpass}" \
+                        "?SessionName={session_name}" \
+                        "?Port={listen_port}" \
+                        "?QueryPort={query_port}" \
                         "?ServerPassword{serverpass}" \
+                        "?ServerAdminPassword={adminpass}" \
+                        "?MaxPlayers={players}" \
+                        "?GameModIds={mods}" \
+                        "?ClusterDirOverride={clustdirover}" \
+                        "?clusterid={clusterid}" \
+                        "?NoTransferFromFiltering={NoTransferFromFiltering}" \
+                        "?PreventDownloadSurvivors={PreventDownloadSurvivors}" \
+                        "?PreventDownloadDinos={PreventDownloadDinos}" \
+                        "?PreventUploadSurvivors={PreventUploadSurvivors}" \
+                        "?PreventUploadDinos={PreventUploadDinos}" \
+                        "?RCONServerGameLogBuffer={rconbuffer}" \
                         "?listen " \
-                        "-server " \
-                        "-log " \
-                        "{mapid}" \
+                        "-servergamelog " \
                 .format(my_binary=self.folder,
                         map=self.config['serverMap'],
-                        mods=mods,
-                        players=self.config['MaxPlayers'],
+                        mapid=map_mod_id,
+                        rcon_port=self.config['RCONPort'],
+                        session_name=str(self.config['SessionName']),
                         listen_port=self.config['Port'],
                         query_port=self.config['QueryPort'],
-                        rcon_port=self.config['RCONPort'],
-                        adminpass=self.config['ServerAdminPassword'],
                         serverpass=server_password,
-                        mapid=map_mod_id,
+                        adminpass=self.config['ServerAdminPassword'],
+                        players=self.config['MaxPlayers'],
+                        mods=mods,
+                        clustdirover=self.config['ClusterDirOverride'],
+                        clusterid=self.config['clusterid'],
+                        NoTransferFromFiltering=self.config['NoTransferFromFiltering'],
+                        PreventDownloadSurvivors=self.config['PreventDownloadSurvivors'],
+                        PreventDownloadDinos=self.config['PreventDownloadDinos'],
+                        PreventUploadSurvivors=self.config['PreventUploadSurvivors'],
+                        PreventUploadDinos=self.config['PreventUploadDinos'],
+                        rconbuffer='600'
                         )
 
-            server_process = subprocess.Popen(shlex.split(start_cmd), shell=False)
+            server_process = subprocess.Popen(shlex.split(start_cmd), stdout=subprocess.PIPE)
             pid = server_process.pid
             with open(self.pid_file, 'w') as my_pid_file:
                 my_pid_file.write('{}'.format(pid))
