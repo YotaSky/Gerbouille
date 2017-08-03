@@ -13,12 +13,12 @@ class CmdServer(object):
     def __init__(self, config, safe=False):
         self.config = config
         self.safe = safe
-        self.pid_file = os.path.join('ark.pid')
+        self.pid_file = os.path.join(os.path.sep,'etc','gerbouille','ark.pid')
         
         #Rendre multi-instance
-        self.folder = '/home/arkserver/ARK-Event2/ShooterGame/Binaries/Linux/ShooterGameServer'
 
-    def start(self):
+    def start(self, choice):
+        folder = os.path.join(os.path.sep,'home','arkserver','ARK-'+choice.capitalize(),'ShooterGame','Binaries','Linux','ShooterGameServer')
         result = {}
         if os.path.isfile(self.pid_file):
             with open(self.pid_file, 'r') as pidfile:
@@ -87,7 +87,7 @@ class CmdServer(object):
                         "?RCONServerGameLogBuffer={rconbuffer}" \
                         "?listen " \
                         "-servergamelog " \
-                .format(my_binary=self.folder,
+                .format(my_binary=folder,
                         map=self.config['serverMap'],
                         mapid=map_mod_id,
                         rcon_port=self.config['RCONPort'],
@@ -108,7 +108,7 @@ class CmdServer(object):
                         rconbuffer='600'
                         )
 
-            server_process = subprocess.Popen(shlex.split(start_cmd), stdout=subprocess.PIPE)
+            server_process = subprocess.Popen(shlex.split(start_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
             pid = server_process.pid
             with open(self.pid_file, 'w') as my_pid_file:
                 my_pid_file.write('{}'.format(pid))
@@ -140,7 +140,3 @@ class CmdServer(object):
             result['message'] = "Et voila, Gerbouille a tout pété l'instance !"
 
             return result
-
-                
-
-

@@ -19,7 +19,6 @@ client = discord.Client()
 
 #Variables temporaires
 host = '127.0.0.1'
-instance = '/etc/gerbouille/event2.cfg'
 folder = '/etc/gerbouille/'
 token = open(folder+'token')
 
@@ -103,12 +102,18 @@ async def on_message(message):
             if x.endswith('.cfg'):
                 arkmap.append(x)
         
+        em = discord.Embed(title='Liste des survivant(e)s', 
+            description="Les serveurs affichés sont ceux en ligne, seul les noms steam sont consultables et non ceux InGame.",
+            colour=0xDEADBF, 
+            author='Yota')
+        await client.send_message(message.channel, "", embed=em)
+        
         for cfg in arkmap:
             var = config(folder+cfg)
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             if sock.connect_ex((host,int(var['RCONPort']))) != 0:
                 say = '**'+var['SessionName']+'** : Serveur Hors Ligne'
-                await client.send_message(message.channel, say)
+                #await client.send_message(message.channel, say)
                 continue
             name = valve.map(message, int(var['QueryPort']))
             if not name:
@@ -123,6 +128,7 @@ async def on_message(message):
                 lst = ' ('+', '.join(extract)+')'
             else: 
                 lst = ''
+            
             say = '**'+var['SessionName']+'** : '+str(len(extract))+' survivant(s) en ligne'+lst
             await client.send_message(message.channel, say)
 
@@ -142,6 +148,8 @@ async def on_message(message):
         namemap = []
         for x in os.listdir(folder):
             if x.endswith('.cfg'):
+                if config(folder+x)['Enable'] != "True":
+                    continue
                 name = config(folder+x)['SessionName']
                 listmap.append('**!%s** - %s'%(x.split('.')[0],name))
                 namemap.append(x.split('.')[0])
@@ -158,13 +166,15 @@ async def on_message(message):
         await client.send_message(message.channel, "```NOTA: LES COMMANDES SONT BLOQUEES SUR EVENT2 LE TEMPS DE TERMINER ```")
         msg = await client.wait_for_message(timeout=120.0, author=message.author)
              
-        choice = msg.content.replace('!','')
+        choice_map = msg.content.replace('!','')
         
-        if choice not in namemap:
+        if choice_map is None:
+            return
+        
+        if choice_map not in namemap:
             await client.send_message(message.channel, "C'est quoi que t'as pas compris dans choisir une instance ???")
             await client.send_message(message.channel,scraping.insultron())
             return
-        
 
         admin_msg = "{start}" \
                     "{stop}" \
@@ -184,7 +194,7 @@ async def on_message(message):
                     backup="**!backup** - Sauvegarde données Map [OFF]\n",
                     )
 
-        em = discord.Embed(title='Action sur instance **%s**'%(choice),
+        em = discord.Embed(title='Action sur instance **%s**'%(choice_map),
             description="Attention, ces commandes agissent directement sur les serveurs ARK de France-Evolved."\
                         " Certaines demanderont une confirmation en plus des accès Administrateur."\
                         " Saisir l'option souhaitée !",
@@ -197,16 +207,18 @@ async def on_message(message):
 
         msg = await client.wait_for_message(timeout=120.0, author=message.author)
         
-        choice = msg.content
+        choice_cmd = msg.content
 
-        if choice == "!start":
+        instance = folder+msg.content.replace('!','')+'.cfg'
+        
+        if choice_cmd == "!start":
             logger(message, "!start")
-            server = CmdServer(config(instance)).start()
+            server = CmdServer(config(folder+choice_map+'.cfg')).start(choice_map)
             await client.send_message(message.channel, server['message'])
 
-        elif choice == "!stop":
+        elif choice_cmd == "!stop":
             logger(message, "!stop")
-            server = CmdServer(config(instance)).stop()
+            server = CmdServer(config(folder+choice_map+'.cfg')).stop()
             await client.send_message(message.channel, server['message'])
     
         else:

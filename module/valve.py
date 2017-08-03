@@ -5,9 +5,6 @@
 
 import valve.source.a2s
 
-server = valve.source.a2s.ServerQuerier(address=('127.0.0.1', 27015), timeout = 5.0)
-info = server.info()
-
 def request(message, port):
     server = valve.source.a2s.ServerQuerier(address=('127.0.0.1', port), timeout = 5.0)
     name = server.info()["server_name"].format(message)    
@@ -23,6 +20,7 @@ def ping(message):
     return msg
 
 def status(message):
+    server = valve.source.a2s.ServerQuerier(address=('127.0.0.1', 27015), timeout = 5.0)
     name = server.info()["server_name"].format(message)
     map = server.info()["map"].format(message)
     game = server.info()["game"].format(message)
