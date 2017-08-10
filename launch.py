@@ -9,18 +9,22 @@ import asyncio
 import socket
 import datetime
 import os
+from daemon import runner
+import daemon
 
 from module import valve
 from module import srcds
 from module import scraping
 from module.CmdServer import CmdServer
 
-client = discord.Client()
-
-#Variables temporaires
-host = '127.0.0.1'
 folder = '/etc/gerbouille/'
 token = open(folder+'token')
+host = '127.0.0.1'
+client = discord.Client()
+
+class Test:
+    def run(self):
+        client.run(open('/etc/gerbouille/token').read().replace('\n',''))
 
 def auth(message):
     file = open("/etc/gerbouille/users")
@@ -31,7 +35,7 @@ def auth(message):
                 return row
     finally:
         file.close()
-
+    
 @client.event
 async def on_ready():
     print('Connexion')
@@ -163,7 +167,6 @@ async def on_message(message):
         await client.send_message(message.channel, "", embed=em)
         
         await client.send_message(message.channel, '\n'.join(listmap))
-        await client.send_message(message.channel, "```NOTA: LES COMMANDES SONT BLOQUEES SUR EVENT2 LE TEMPS DE TERMINER ```")
         msg = await client.wait_for_message(timeout=120.0, author=message.author)
              
         choice_map = msg.content.replace('!','')
@@ -213,7 +216,7 @@ async def on_message(message):
         
         if choice_cmd == "!start":
             logger(message, "!start")
-            server = CmdServer(config(folder+choice_map+'.cfg')).start(choice_map)
+            server = CmdServer(config(folder+choice_map+'.cfg')).start()
             await client.send_message(message.channel, server['message'])
 
         elif choice_cmd == "!stop":
@@ -230,4 +233,5 @@ async def on_message(message):
     if message.content.startswith('!insulte'):
         await client.send_message(message.channel,scraping.insultron())
 
-client.run(open('/etc/gerbouille/token').read().replace('\n',''))
+n = Test()
+n.run()

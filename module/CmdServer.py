@@ -8,17 +8,16 @@ import shlex
 import subprocess
 import psutil
 import signal
+import binascii
 
 class CmdServer(object):
     def __init__(self, config, safe=False):
         self.config = config
         self.safe = safe
-        self.pid_file = os.path.join(os.path.sep,'etc','gerbouille','ark.pid')
-        
-        #Rendre multi-instance
+        self.folder = os.path.join(os.path.sep,config['arkserverroot'],'ShooterGame','Binaries','Linux','ShooterGameServer')
+        self.pid_file = os.path.join(os.path.sep,'etc','gerbouille','{}.pid'.format(binascii.crc32(bytes(self.folder,encoding="UTF-8"))))
 
-    def start(self, choice):
-        folder = os.path.join(os.path.sep,'home','arkserver','ARK-'+choice.capitalize(),'ShooterGame','Binaries','Linux','ShooterGameServer')
+    def start(self):
         result = {}
         if os.path.isfile(self.pid_file):
             with open(self.pid_file, 'r') as pidfile:
@@ -26,7 +25,7 @@ class CmdServer(object):
             try:
                 psutil.Process(pid)
                 result['error'] = True
-                result['message'] = 'Wooot le serveur est déjà en ligne !'
+                result['message'] = "D'Oh! Le serveur est déjà en ligne !"
 
                 return result
             except:
@@ -87,8 +86,8 @@ class CmdServer(object):
                         "?RCONServerGameLogBuffer={rconbuffer}" \
                         "?listen " \
                         "-servergamelog " \
-                .format(my_binary=folder,
-                        map=self.config['serverMap'],
+                .format(my_binary=self.folder,
+                        map=str(self.config['serverMap']),
                         mapid=map_mod_id,
                         rcon_port=self.config['RCONPort'],
                         session_name=str(self.config['SessionName']),
@@ -108,12 +107,13 @@ class CmdServer(object):
                         rconbuffer='600'
                         )
 
-            server_process = subprocess.Popen(shlex.split(start_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT )
+            print (start_cmd)
+
+            server_process = subprocess.Popen(shlex.split(start_cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, start_new_session = True)
             pid = server_process.pid
             with open(self.pid_file, 'w') as my_pid_file:
                 my_pid_file.write('{}'.format(pid))
-            map_temp="event2"
-            result['message'] = "L'instance %s est en cours de chargement ... Petit Strip-Poker en attendant ?"%(map_temp)
+            result['message'] = "L'instance %s est en cours de chargement ... Petit Strip-Poker en attendant ?"%(self.config['serverMap'])
             return result
 
         else:
