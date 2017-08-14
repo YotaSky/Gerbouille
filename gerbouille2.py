@@ -56,11 +56,7 @@ async def on_message(message):
 		Commande à faire devenir passive"""
 		Tools().logger(message, "!auth")
 		user = Tools().auth(message)
-		print(user)
-		if user is None:
-			await client.send_message(message.channel,'Gerbouille te connait pas !')
-		else:
-			await client.send_message(message.channel,user)
+		await client.send_message(message.channel,user)
 
 class Tools:
 	def __init__(self):
@@ -86,7 +82,9 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
-					return 
+				else:
+					msg = 'Gerbouille te connait pas !'
+				return msg
 		finally:
 			acl.close()
 
