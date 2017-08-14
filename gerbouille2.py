@@ -88,7 +88,7 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
-				return msg
+					return msg
 		finally:
 			file.close()
 
