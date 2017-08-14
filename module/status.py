@@ -3,6 +3,8 @@
 import os
 import socket
 import discord
+
+from module import srcds
 from module import valve
 
 class Status: # Définition des méthodes de fonction de Gerbouille
