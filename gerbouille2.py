@@ -29,7 +29,8 @@ async def on_message(message):
 
 	if message.content.startswith('!status'):
 		"""Récupération des informations serveur"""
-		Status().players(message)
+		msg = Status().players(message)
+		await client.send_message(message.channel,msg
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""

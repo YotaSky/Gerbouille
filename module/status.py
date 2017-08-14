@@ -58,4 +58,5 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            print (listplayers)
+            allconf.append(listplayers)
+        return allconf
