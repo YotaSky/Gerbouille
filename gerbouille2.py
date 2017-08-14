@@ -73,10 +73,9 @@ class Tools:
 
 	def auth(self, message):
 		data = 'users'
-		acl = open(os.path.join(os.path.sep,self.pathconf,data))
+		file = open(os.path.join(os.path.sep,self.pathconf,data))
 		try:
-			reader = csv.reader(acl)
-			for user in reader:
+			for user in csv.reader(file):
 				print(user)
 				print(message.author.id)
 				if user[0] == message.author.id:
@@ -89,8 +88,6 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
-				else:
-					msg = 'Gerbouille te connait pas !'
 				return msg
 		finally:
 			acl.close()
