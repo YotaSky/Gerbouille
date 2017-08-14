@@ -76,9 +76,9 @@ class Tools:
 		acl = open(os.path.join(os.path.sep,self.pathconf,data))
 		try:
 			reader = csv.reader(acl)
-			await client.send_message(message.channel,reader)
+			print(reader)
 			for user in reader:
-				await client.send_message(message.channel,user)
+				print(user)
 				if user[0] == message.author.id:
 					msg = 	"{name}" \
 							"{discord}" \
