@@ -29,7 +29,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
     def checkrcon(self, config):
         """Fonction de vérification si instance en ligne via port TCP RCON"""
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        return '{}: {}'.format(config['SessionName'],x.connect_ex((config['IPserver'],int(config['RCONPort']))))
+        return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
     def players(self):
         """Liste des joueurs sur les instances ARK"""
@@ -38,13 +38,10 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         for i in os.listdir(self.folder):
             if i.endswith('.cfg'):
                 allconf.append(i)
-        print (allconf)
 
         for conf in allconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
-            if self.checkrcon(config) != 0:
-                msg = '{}'
-                continue
+            print(self.checkrcon(config))
             name = valve.map(message, int(config['QueryPort']))
             if not name:
                 continue
