@@ -90,7 +90,7 @@ class Tools:
 								)
 				return msg
 		finally:
-			acl.close()
+			file.close()
 
 	def logger(self, message, command, verbose=False):
 		date = datetime.datetime.now()
