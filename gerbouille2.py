@@ -61,7 +61,7 @@ class Tools:
 		data = 'token'
 		client.run(open(os.path.join(os.path.sep,self.pathconf,data)).read().replace('\n',''))
 
-	def auth(self, id):
+	def auth(self, message):
 		data = 'users'
 		acl = open(os.path.join(os.path.sep,self.pathconf,data))
 		try:
