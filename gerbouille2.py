@@ -59,10 +59,7 @@ async def on_message(message):
 		if user is None:
 			await client.send_message(message.channel,'Gerbouille te connait pas !')
 		else:
-			await client.send_message(message.channel,'Voici mes informations sur %s'%user[1])
-			await client.send_message(message.channel,'ID Discord : %s'%user[0])
-			await client.send_message(message.channel,'ID Steam : %s'%user[2])
-			await client.send_message(message.channel,'Groupe : %s'%user[3])
+			await client.send_message(message.channel,user)
 
 class Tools:
 	def __init__(self):
@@ -79,7 +76,16 @@ class Tools:
 			reader = csv.reader(acl)
 			for row in reader:
 				if row[0] == message.author.id:
-					return row
+					msg = 	"{name}" \
+							"{discord}" \
+							"{steam}" \
+							"{group}" \
+						.format(name="Voici mes informations sur **{}**\n".format(user[1]),
+								discord="ID Discord : **{}**\n".format(user[0]),
+								steam="ID Steam : **{}**\n".format(user[2]),
+								group="Groupe de droits : **{}**".format(user[3]),
+								)
+					return 
 		finally:
 			acl.close()
 
