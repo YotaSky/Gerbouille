@@ -88,6 +88,7 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
+					continue
 				if user[0] != message.author.id:
 					msg = 'Gerbouille te connais pas ! ... {}'.format(scraping.insultron())
 				return msg
