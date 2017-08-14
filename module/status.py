@@ -38,6 +38,14 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         for i in os.listdir(self.folder):
             if i.endswith('.cfg'):
                 allconf.append(i)
+        print (allconf)
 
         for conf in allconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
+            if checkrcon(config) != 0:
+                msg = '{}'
+                continue
+            name = valve.map(message, int(config['QueryPort']))
+            if not name:
+                continue
+            print (name)
