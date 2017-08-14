@@ -30,6 +30,11 @@ async def on_message(message):
 	if message.content.startswith('!status'):
 		"""Récupération des informations serveur"""
 		msg = Status().players(message)
+		em = discord.Embed(title='Liste des survivant(e)s', 
+            description="Les serveurs affichés sont ceux en ligne, seul les noms steam sont consultables et non ceux InGame.",
+            colour=0xDEADBF, 
+            author='Yota')
+        await client.send_message(message.channel, "", embed=em)
 		await client.send_message(message.channel, msg)
 
 	if message.content.startswith('!load'):
