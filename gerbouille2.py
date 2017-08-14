@@ -75,6 +75,7 @@ class Tools:
 		try:
 			reader = csv.reader(acl)
 			for user in reader:
+				print (user)
 				if user[0] == message.author.id:
 					msg = 	"{name}" \
 							"{discord}" \
