@@ -32,7 +32,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def players(self):
+    def players(self,message):
         """Liste des joueurs sur les instances ARK"""
         #Recuperation des fichiers de configuration d'instance
         allconf = []
