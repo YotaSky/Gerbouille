@@ -27,8 +27,9 @@ async def on_message(message):
 		"""Rendre la composition de l'aide dynamique"""
 		return
 
-	if message.content.startswith('!status'):
+	if message.content.startswith('!who'):
 		"""Récupération des informations serveur"""
+		Tools().logger(message, "!who")
 		msg = Status().players(message)
 		em = discord.Embed(title='Liste des survivant(e)s', 
             description="Les serveurs affichés sont ceux en ligne, seul les noms steam sont consultables et non ceux InGame.",
@@ -39,6 +40,7 @@ async def on_message(message):
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
+		Tools().logger(message, "!load")
 		await client.send_message(message.channel,"Load Average: "+str(os.getloadavg()))
 
 	if message.content.startswith('!insulte'):
@@ -52,6 +54,7 @@ async def on_message(message):
 		- Stockage des IDs Steam
 		- Stockage des IDs Discord
 		Commande à faire devenir passive"""
+		Tools().logger(message, "!auth")
 		user = Tools().auth(message)
 		if user is None:
 			await client.send_message(message.channel,'Gerbouille te connait pas !')
