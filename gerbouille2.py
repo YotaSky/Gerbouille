@@ -12,8 +12,8 @@ import datetime
 from module.status import Status
 from module import scraping
 
-client = discord.Client()
 
+client = discord.Client()
 
 @client.event
 async def on_ready():
@@ -29,12 +29,14 @@ async def on_message(message):
 
 	if message.content.startswith('!status'):
 		"""Récupération des informations serveur"""
-		Status().players()
+		Status().players(message)
 
 	if message.content.startswith('!load'):
+		"""Récupération du load average"""
 		await client.send_message(message.channel,"Load Average: "+str(os.getloadavg()))
 
-	if message.content.startswith('insulte'):
+	if message.content.startswith('!insulte'):
+		"""Scraping sur le site http://www.insultron.com"""
 		await client.send_message(message.channel,scraping.insultron())
 
 	if message.content.startswith('!auth'):
