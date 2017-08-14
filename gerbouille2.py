@@ -56,6 +56,8 @@ async def on_message(message):
 		Commande à faire devenir passive"""
 		Tools().logger(message, "!auth")
 		msg = Tools().auth(message)
+		if msg == None:
+			return
 		em = discord.Embed(title='Droits en base', 
             description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
             colour=0xDEADBF, 
