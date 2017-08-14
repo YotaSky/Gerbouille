@@ -40,12 +40,13 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if i.endswith('.cfg'):
                 allconf.append(i)
 
+        players = []
         for conf in allconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if self.checkrcon(config) != 0:
                 continue
-            print (config)
-            #name = valve.map(message, int(config['QueryPort']))
+            name = valve.map(message, int(config['QueryPort']))
+            print (name)
             #if not name:
             #    continue
             #print (name)
