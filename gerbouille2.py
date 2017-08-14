@@ -55,8 +55,13 @@ async def on_message(message):
 		- Stockage des IDs Discord
 		Commande à faire devenir passive"""
 		Tools().logger(message, "!auth")
-		user = Tools().auth(message)
-		await client.send_message(message.channel,user)
+		msg = Tools().auth(message)
+		em = discord.Embed(title='Droits en base', 
+            description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
+            colour=0xDEADBF, 
+            author='Yota')
+		await client.send_message(message.channel, "", embed=em)
+		await client.send_message(message.channel,msg)
 
 class Tools:
 	def __init__(self):
