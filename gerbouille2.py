@@ -78,17 +78,19 @@ class Tools:
 			for user in csv.reader(file):
 				print(user)
 				print(message.author.id)
-				if user[0] == message.author.id:
-					msg = 	"{name}" \
-							"{discord}" \
-							"{steam}" \
-							"{group}" \
-						.format(name="Voici mes informations sur **{}**\n".format(user[1]),
-								discord="ID Discord : **{}**\n".format(user[0]),
-								steam="ID Steam : **{}**\n".format(user[2]),
-								group="Groupe de droits : **{}**".format(user[3]),
-								)
+				if user[0] != message.author.id:
+					msg = insultron()
 					return msg
+				msg = 	"{name}" \
+						"{discord}" \
+						"{steam}" \
+						"{group}" \
+					.format(name="Voici mes informations sur **{}**\n".format(user[1]),
+							discord="ID Discord : **{}**\n".format(user[0]),
+							steam="ID Steam : **{}**\n".format(user[2]),
+							group="Groupe de droits : **{}**".format(user[3]),
+							)
+				return msg
 		finally:
 			file.close()
 
