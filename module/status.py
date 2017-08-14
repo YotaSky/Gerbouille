@@ -1,4 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3.6
+#Bot Gerbouille Discord/ARK
+#France-Evolved https://discord.gg/gVsveNY
+#2017 By YotaSky https://github.com/YotaSky
 
 import os
 import socket
@@ -42,6 +45,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if i.endswith('.cfg'):
                 allconf.append(i)
 
+        """Recuperation de la liste des joueurs par map
+        - Verification de l'etat online/hors line
+        - Composition de la liste joueurs"""
         info = []
         for conf in allconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
@@ -58,5 +64,5 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            info.append('**{}**: {} survivant(s) en ligne {}'.format(config['SessionName'], str(len(listplayers)), lst))
-        return info
+            info.append('**{}**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], str(len(listplayers)), lst))
+        return ', '.join(info)
