@@ -3,6 +3,7 @@
 import os
 import socket
 import discord
+from module import valve
 
 class Status: # Définition des méthodes de fonction de Gerbouille
     """Classe regroupant les fonction d'information de notre Gerbouille, à savoir:
