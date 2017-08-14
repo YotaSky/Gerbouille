@@ -58,12 +58,12 @@ class Tools:
 		self.pathconf = os.path.join(os.path.sep,'etc','gerbouille')
 
 	def run(self):
-		file = 'token'
-		client.run(open().read(os.path.join(os.path.sep,self.pathconf,file)).replace('\n',''))
+		data = 'token'
+		client.run(open(os.path.join(os.path.sep,self.pathconf,data)).read().replace('\n',''))
 
 	def auth(self, id):
-		file = 'users'
-		acl = open(os.path.join(os.path.sep,self.pathconf,file))
+		data = 'users'
+		acl = open(os.path.join(os.path.sep,self.pathconf,data))
 		try:
 			reader = csv.reader(acl)
 			for row in reader:
