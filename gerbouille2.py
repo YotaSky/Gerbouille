@@ -75,11 +75,8 @@ class Tools:
 		data = 'users'
 		file = open(os.path.join(os.path.sep,self.pathconf,data))
 		try:
-			print(csv.reader(file))
 			for user in csv.reader(file):
-				print(message.author.id)
-				while user[0] == message.author.id:
-					print(user)
+				if user[0] == message.author.id:
 					msg = 	"{name}" \
 							"{discord}" \
 							"{steam}" \
@@ -89,10 +86,7 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
-					continue
-				if user[0] != message.author.id:
-					msg = 'Gerbouille te connais pas ! ... {}'.format(scraping.insultron())
-				return msg
+					return msg
 		finally:
 			file.close()
 
