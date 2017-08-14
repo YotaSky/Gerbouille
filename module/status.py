@@ -40,13 +40,20 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if i.endswith('.cfg'):
                 allconf.append(i)
 
-        players = []
+        info = []
         for conf in allconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if self.checkrcon(config) != 0:
                 continue
             name = valve.map(message, int(config['QueryPort']))
-            print (name)
-            #if not name:
-            #    continue
-            #print (name)
+            rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
+            listplayers = []
+            players = rcon.rcon("listplayers").decode("utf-8")
+            if players.find('No Players Connected') < 0:
+                for i in players.split('\n'):
+                    if len(i) > 1:
+                        listplayers.append(i.split(',')[0].split('. ',1)[1])
+                lst = ' ('+', '.join(listplayers)+')'
+            else: 
+                lst = ''
+                print (listplayers)
