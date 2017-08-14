@@ -13,6 +13,7 @@ from daemon import runner
 import daemon
 
 from module import valve
+from module.status import Status
 from module import srcds
 from module import scraping
 from module.CmdServer import CmdServer
@@ -35,7 +36,10 @@ def auth(message):
                 return row
     finally:
         file.close()
-    
+
+'''
+Lancement du Bot avec informations de connexion
+'''    
 @client.event
 async def on_ready():
     print('Connexion')
@@ -60,13 +64,11 @@ def config(cfg):
 async def on_message(message):
     if message.content.startswith('!help'):
         help_msg =  "{admin}" \
-                    "{listplayers}" \
                     "{infos}"\
                     "{roulette}"\
                     "{insulte}"\
             .format(admin="**!admin** - Gestion des instances ARK\n",
-                    listplayers="**!listplayers** - Liste des survivants actuellement en jeu \n",
-                    infos="**!infos** - Informations sur nos serveurs\n",
+                    infos="**!infos** - Liste des serveurs et survivants actuellement en jeu \n",
                     roulette="**!roulette** - Projet de jeu a la con\n",
                     insulte="**!insulte** - A vos risques et périls ..."
                     )
@@ -80,6 +82,10 @@ async def on_message(message):
         
         await client.send_message(message.channel, "", embed=em)
         await client.send_message(message.channel, help_msg)
+
+    if message.content.startswith('!status'):
+        f = Status()
+        f.players()
 
     if message.content.startswith('!auth'):
         logger(message, "!auth")
@@ -98,8 +104,8 @@ async def on_message(message):
         else:
             pass
 
-    if message.content.startswith('!listplayers'):
-        logger(message, "!listplayers")
+    if message.content.startswith('!infos'):
+        logger(message, "!infos")
         arkmap = []
         
         for x in os.listdir(folder):
@@ -223,7 +229,13 @@ async def on_message(message):
             logger(message, "!stop")
             server = CmdServer(config(folder+choice_map+'.cfg')).stop()
             await client.send_message(message.channel, server['message'])
-    
+
+        elif choice_cmd == "!saveworld":
+            logger(message, "!saveworld")
+            #rcon = srcds.SourceRcon(settings.Address, settings.ark_main_rconport, settings.ark_main_password, 5)
+            #list = rcon.rcon("saveworld").decode("utf-8")
+            #await client.send_message(message.channel, list)
+ 
         else:
             return
         
