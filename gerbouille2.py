@@ -75,7 +75,6 @@ class Tools:
 		try:
 			reader = csv.reader(acl)
 			for user in reader:
-				print (user)
 				if user[0] == message.author.id:
 					msg = 	"{name}" \
 							"{discord}" \
@@ -86,6 +85,7 @@ class Tools:
 								steam="ID Steam : **{}**\n".format(user[2]),
 								group="Groupe de droits : **{}**".format(user[3]),
 								)
+					print(msg)
 					return 
 		finally:
 			acl.close()
