@@ -57,6 +57,7 @@ async def on_message(message):
 		Tools().logger(message, "!auth")
 		msg = Tools().auth(message)
 		if msg == None:
+			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
 		em = discord.Embed(title='Droits en base', 
             description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
