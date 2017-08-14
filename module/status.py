@@ -58,4 +58,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-                print (listplayers)
+            print (listplayers)
