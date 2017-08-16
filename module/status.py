@@ -26,7 +26,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         self.etcconf = []
         for i in os.listdir(self.folder):
             if i.endswith('.cfg'):
-                self.allconf.append(i)
+                self.etcconf.append(i)
 
     def extract(self, path):
         """Recuperation des attributs du fichier de configuration des instances"""
