@@ -47,6 +47,9 @@ async def on_message(message):
 		"""Scraping sur le site http://www.insultron.com"""
 		await client.send_message(message.channel,scraping.insultron())
 
+	if message.content.startswith('!admin'):
+
+
 	if message.content.startswith('!auth'):
 		"""Fonction de vérification des droits
 		Fichier /etc/gerbouille/users
@@ -55,10 +58,19 @@ async def on_message(message):
 		- Stockage des IDs Discord
 		Commande à faire devenir passive"""
 		Tools().logger(message, "!auth")
-		msg = Tools().auth(message)
-		if msg == None:
+		user = Tools().auth(message)
+		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
+		msg = 	"{name}" \
+				"{discord}" \
+				"{steam}" \
+				"{group}" \
+			.format(name="Voici mes informations sur **{}**\n".format(user[1]),
+				discord="ID Discord : **{}**\n".format(user[0]),
+				steam="ID Steam : **{}**\n".format(user[2]),
+				group="Groupe de droits : **{}**".format(user[3]),
+				)
 		em = discord.Embed(title='Droits en base', 
             description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
             colour=0xDEADBF, 
@@ -80,15 +92,6 @@ class Tools:
 		try:
 			for user in csv.reader(file):
 				if user[0] == message.author.id:
-					msg = 	"{name}" \
-							"{discord}" \
-							"{steam}" \
-							"{group}" \
-						.format(name="Voici mes informations sur **{}**\n".format(user[1]),
-								discord="ID Discord : **{}**\n".format(user[0]),
-								steam="ID Steam : **{}**\n".format(user[2]),
-								group="Groupe de droits : **{}**".format(user[3]),
-								)
 					return msg
 		finally:
 			file.close()
