@@ -48,7 +48,7 @@ async def on_message(message):
 		await client.send_message(message.channel,scraping.insultron())
 
 	if message.content.startswith('!admin'):
-
+		return
 
 	if message.content.startswith('!auth'):
 		"""Fonction de vérification des droits
