@@ -69,5 +69,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            info.append('**{} - ({})**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], version, str(len(listplayers)), lst))
+            info.append('**{}**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], str(len(listplayers)), lst))
+            #info.append('**{} - ({})**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], version, str(len(listplayers)), lst))
         return ''.join(info)
