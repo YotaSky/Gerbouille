@@ -92,7 +92,7 @@ class Tools:
 		try:
 			for user in csv.reader(file):
 				if user[0] == message.author.id:
-					return msg
+					return user
 		finally:
 			file.close()
 
