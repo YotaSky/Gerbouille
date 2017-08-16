@@ -21,6 +21,12 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         self.folder = os.path.join(os.path.sep,'etc','gerbouille')
         self.message = []
         self.client = discord.Client()
+        
+        #Recuperation des fichiers de configuration d'instance
+        self.etcconf = []
+        for i in os.listdir(self.folder):
+            if i.endswith('.cfg'):
+                self.allconf.append(i)
 
     def extract(self, path):
         """Recuperation des attributs du fichier de configuration des instances"""
@@ -37,19 +43,17 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def players(self,message):
-        """Liste des joueurs sur les instances ARK"""
-        #Recuperation des fichiers de configuration d'instance
-        allconf = []
-        for i in os.listdir(self.folder):
-            if i.endswith('.cfg'):
-                allconf.append(i)
+    def servers(self):
+        listsrv = []
 
-        """Recuperation de la liste des joueurs par map
+
+    def players(self,message):
+        """Liste des joueurs sur les instances ARK
+        Recuperation de la liste des joueurs par map
         - Verification de l'etat online/hors line
         - Composition de la liste joueurs"""
         info = []
-        for conf in allconf:
+        for conf in self.etcconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if self.checkrcon(config) != 0:
                 continue
