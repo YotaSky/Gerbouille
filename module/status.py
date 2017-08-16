@@ -59,6 +59,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 continue
             name = valve.map(message, int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
+            version = valve.version(message, int(config['QueryPort']))
             listplayers = []
             players = rcon.rcon("listplayers").decode("utf-8")
             if players.find('No Players Connected') < 0:
@@ -68,5 +69,5 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            info.append('**{}**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], str(len(listplayers)), lst))
+            info.append('**{} - ({})**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], version, str(len(listplayers)), lst))
         return ''.join(info)
