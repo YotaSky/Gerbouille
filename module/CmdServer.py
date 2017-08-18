@@ -17,6 +17,10 @@ class CmdServer(object):
         self.folder = os.path.join(os.path.sep,config['arkserverroot'],'ShooterGame','Binaries','Linux','ShooterGameServer')
         self.pid_file = os.path.join(os.path.sep,'etc','gerbouille','{}.pid'.format(binascii.crc32(bytes(self.folder,encoding="UTF-8"))))
 
+    def choice(self, opt):
+        if opt == '!start':
+            return 'ok'
+
     def start(self):
         result = {}
         if os.path.isfile(self.pid_file):

@@ -11,6 +11,7 @@ import datetime
 
 from module.status import Status
 from module import scraping
+from module.CmdServer import CmdServer
 
 
 client = discord.Client()
@@ -63,6 +64,9 @@ async def on_message(message):
 		await client.send_message(message.channel,servers)
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
+		launch = CmdServer().choice(msg.content)
+		await client.send_message(message.channel,launch)
+
 	
 	if message.content.startswith('tagle'):
 		"""Fonction indispensable pour un échange constructif et courtois"""
