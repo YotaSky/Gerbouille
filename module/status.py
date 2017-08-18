@@ -51,11 +51,11 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if config['Enable'] != "True":
                 continue
             if self.checkrcon(config) != 0:
-                up = 'OFF'
+                up = 'Offline'
             else:
-                up = 'ON'
+                up = 'Online'
             name = config['SessionName']
-            listmap.append('**!{}** [{}] - {}'.format(conf.split('.')[0],up,name))
+            listmap.append('**!{}** - {} - **{}**\n'.format(conf.split('.')[0],name,up))
             namemap.append(conf.split('.')[0])
         print(listmap)
         return ''.join(listmap)
