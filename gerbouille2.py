@@ -48,6 +48,7 @@ async def on_message(message):
 		await client.send_message(message.channel,scraping.insultron())
 
 	if message.content.startswith('!admin'):
+		user = Tools().auth(message)
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
@@ -63,6 +64,12 @@ async def on_message(message):
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
 		return
+	
+	if message.content.startswith('tagle'):
+		user = Tools().auth(message)
+		if user[1] == 'Yota':
+			await client.send_message(message.channel,'Ouais ta gueule !')
+
 
 	if message.content.startswith('!auth'):
 		"""Fonction de vérification des droits
