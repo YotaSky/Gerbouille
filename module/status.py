@@ -63,9 +63,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             else:
                 up = '<Online>'
             name = config['SessionName']
-            listmap.append('{}. {} - {} {}\n'.format(num,conf.split('.')[0],name,up,protect))
+            listmap.append('{}. {} {}\n'.format(num,name,up,protect))
             namemap.append(conf.split('.')[0])
-        print(listmap)
         if listview: 
             txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}```'.format(''.join(listmap))
             return txt
