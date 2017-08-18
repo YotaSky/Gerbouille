@@ -48,6 +48,20 @@ async def on_message(message):
 		await client.send_message(message.channel,scraping.insultron())
 
 	if message.content.startswith('!admin'):
+		if user == None:
+			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
+			return
+		em = discord.Embed(title='Liste des instances configurées',
+			description="La liste des instances est issue de la liste des fichiers de configuration en .cfg",
+			colour=0xDEADBF,
+			author='Yota'
+			)
+		await client.send_message(message.channel, "", embed=em)
+
+		servers = Status().servers(message)
+		await client.send_message(message.channel,servers)
+
+		msg = await client.wait_for_message(timeout=120.0, author=message.author)
 		return
 
 	if message.content.startswith('!auth'):
