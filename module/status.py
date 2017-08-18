@@ -54,6 +54,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 enable = 'ArkTools'
             if config['Protect'] == "True":
                 protect = 'Secure Owner'
+            else:
+                protect = ''
             if self.checkrcon(config) != 0:
                 up = 'Offline'
             else:
