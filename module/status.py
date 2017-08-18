@@ -53,8 +53,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if config['Enable'] != "True":
                 continue
             name = config['SessionName']
-            listmap.append('**!%s** - %s'%(x.split('.')[0],name))
-            namemap.append(x.split('.')[0])
+            listmap.append('**!%s** - %s'%(conf.split('.')[0],name))
+            namemap.append(conf.split('.')[0])
         return listmap
 
     def players(self,message):
