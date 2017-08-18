@@ -46,22 +46,24 @@ class Status: # Définition des méthodes de fonction de Gerbouille
     def servers(self, listview=True):
         listmap = []
         namemap = []
+        num = 0
         for conf in self.etcconf:
+            num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if config['Enable'] == "True":
                 enable = 'by Gerbouille'
             else:
                 enable = 'by ArkTools'
             if config['Protect'] == "True":
-                protect = ' and Lock'
+                protect = ' and <Lock>'
             else:
                 protect = ''
             if self.checkrcon(config) != 0:
-                up = 'Offline'
+                up = '**Offline**'
             else:
-                up = 'Online'
+                up = '<Online>'
             name = config['SessionName']
-            listmap.append('**!{}** {} - {} - **{}** {}\n'.format(conf.split('.')[0],enable,name,up,protect))
+            listmap.append('{}. {} - {} {}\n'.format(num,conf.split('.')[0],name,up,protect))
             namemap.append(conf.split('.')[0])
         print(listmap)
         if listview: 
