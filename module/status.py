@@ -50,11 +50,15 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if config['Enable'] != "True":
                 continue
+            if self.checkrcon(config) != 0:
+                up = 'OFF'
+            else:
+                up = 'ON'
             name = config['SessionName']
-            listmap.append('**!%s** - %s'%(conf.split('.')[0],name))
+            listmap.append('**!{}** [{}] - {}'.format(conf.split('.')[0],up,name))
             namemap.append(conf.split('.')[0])
         print(listmap)
-        return listmap
+        return ''.join(listmap)
 
     def players(self,message):
         """Liste des joueurs sur les instances ARK
