@@ -55,6 +55,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             name = config['SessionName']
             listmap.append('**!%s** - %s'%(conf.split('.')[0],name))
             namemap.append(conf.split('.')[0])
+        print(listmap)
         return listmap
 
     def players(self,message):
