@@ -43,7 +43,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def servers(self):
+    def servers(self, listview=True):
         listmap = []
         namemap = []
         for conf in self.etcconf:
@@ -64,7 +64,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             listmap.append('**!{}** {} - {} - **{}** {}\n'.format(conf.split('.')[0],enable,name,up,protect))
             namemap.append(conf.split('.')[0])
         print(listmap)
-        return ''.join(listmap)
+        if listview: 
+            return ''.join(listmap)
 
     def players(self,message):
         """Liste des joueurs sur les instances ARK
