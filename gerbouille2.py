@@ -59,13 +59,14 @@ async def on_message(message):
 			)
 		await client.send_message(message.channel, "", embed=em)
 
-		servers = Status().servers(message)
+		servers = Status().servers()
 		await client.send_message(message.channel,servers)
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
 		return
 	
 	if message.content.startswith('tagle'):
+		"""Fonction indispensable pour un échange constructif et courtois"""
 		user = Tools().auth(message)
 		if user[1] == 'Yota':
 			await client.send_message(message.channel,'Ouais ta gueule !')
