@@ -49,9 +49,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         for conf in self.etcconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if config['Enable'] == "True":
-                enable = 'Gerbouille'
+                enable = 'by Gerbouille'
             else:
-                enable = 'ArkTools'
+                enable = 'by ArkTools'
             if config['Protect'] == "True":
                 protect = ' and Lock'
             else:
@@ -61,7 +61,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             else:
                 up = 'Online'
             name = config['SessionName']
-            listmap.append('**!{}** ({}) - {} - **{}** {}\n'.format(conf.split('.')[0],enable,name,up,protect))
+            listmap.append('**!{}** {} - {} - **{}** {}\n'.format(conf.split('.')[0],enable,name,up,protect))
             namemap.append(conf.split('.')[0])
         print(listmap)
         return ''.join(listmap)
