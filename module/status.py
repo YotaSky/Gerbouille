@@ -51,9 +51,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if config['Enable'] == "True":
-                enable = '[G]'
+                enable = '<Gerbouille>'
             else:
-                enable = '[A}'
+                enable = '<ArkTools>'
             if config['Protect'] == "True":
                 protect = 'and <Lock>'
             else:
@@ -63,7 +63,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             else:
                 up = '<Online>'
             name = config['SessionName']
-            listmap.append('{}. {} {} {} {}\n'.format(num,enable,name,up,protect))
+            listmap.append('{}. {} {} {} {}\n'.format(num,name,enable,up,protect))
             namemap.append(conf.split('.')[0])
         if listview: 
             txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}```'.format(''.join(listmap))
