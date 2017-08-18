@@ -48,8 +48,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         namemap = []
         for conf in self.etcconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
-            if self.checkrcon(config) != 0:
-                continue
             if config['Enable'] != "True":
                 continue
             name = config['SessionName']
