@@ -44,8 +44,18 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
     def servers(self):
-        listsrv = []
-
+        listmap = []
+        namemap = []
+        for conf in self.etcconf:
+            config = self.extract(os.path.join(os.path.sep,self.folder,conf))
+            if self.checkrcon(config) != 0:
+                continue
+            if config['Enable'] != "True":
+                continue
+            name = config['SessionName']
+                listmap.append('**!%s** - %s'%(x.split('.')[0],name))
+                namemap.append(x.split('.')[0])
+        return listmap
 
     def players(self,message):
         """Liste des joueurs sur les instances ARK
