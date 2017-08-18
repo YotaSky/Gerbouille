@@ -55,6 +55,7 @@ async def on_message(message):
 			return
 		servers = Status().servers()
 		await client.send_message(message.channel,servers)
+		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
 		launch = CmdServer().choice(msg.content)
