@@ -65,7 +65,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             namemap.append(conf.split('.')[0])
         print(listmap)
         if listview: 
-            return ''.join(listmap)
+            txt = '```markdown\n{}\n{}```'"#Liste des instances ARK (http://www.france-evolved.fr)".format(''.join(listmap))
+            return txt
 
     def players(self,message):
         """Liste des joueurs sur les instances ARK
