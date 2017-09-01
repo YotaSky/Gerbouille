@@ -81,6 +81,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 continue
             name = valve.map(message, int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
+            print (config['ServerAdminPassword'])
             version = valve.version(message, int(config['QueryPort']))
             listplayers = []
             players = rcon.rcon("listplayers").decode("utf-8")
