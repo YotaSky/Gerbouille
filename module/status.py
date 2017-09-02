@@ -41,6 +41,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
     def checkrcon(self, config):
         """Fonction de vérification si instance en ligne via port TCP RCON"""
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        x.settimeout(10)
+
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
     def servers(self, listview=True):
@@ -50,10 +52,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
-            if config['Enable'] == "True":
-                enable = '<Gerbouille>'
-            else:
-                enable = '<ArkTools>'
             if config['Protect'] == "True":
                 protect = 'and <Lock>'
             else:
