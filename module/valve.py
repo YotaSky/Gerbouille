@@ -17,10 +17,11 @@ def map(message, port):
 
 def version(message, port):
     server = valve.source.a2s.ServerQuerier(address=('127.0.0.1', port), timeout = 5.0)
-    map = server.info()["version"].format(message)    
-    return map
+    version = server.info()["version"].format(message)    
+    return version
 
-def ping(message):
+def ping(message, port):
+    server = valve.source.a2s.ServerQuerier(address=('127.0.0.1', port), timeout = 5.0)
     msg = str(server.ping()).format(message)
     return msg
 

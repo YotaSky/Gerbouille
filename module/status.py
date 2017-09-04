@@ -45,10 +45,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
 
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def servers(self, message, listview=True):
+    def servers(self, listview=True):
         listmap = []
         namemap = []
-        ping = valve.ping(message, int(config['QueryPort']))
         num = 0
         for conf in self.etcconf:
             num += 1
@@ -79,6 +78,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if self.checkrcon(config) != 0:
                 continue
             name = valve.map(message, int(config['QueryPort']))
+            ping = valve.ping(message, int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
             version = valve.version(message, int(config['QueryPort']))
             listplayers = []
@@ -90,6 +90,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            info.append('**{}**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], str(len(listplayers)), lst))
+            info.append('**{}** (Ping={}): {} survivant(s) en ligne {}\n'.format(config['SessionName'], ping, str(len(listplayers)), lst))
             #info.append('**{} - ({})**: {} survivant(s) en ligne {}\n'.format(config['SessionName'], version, str(len(listplayers)), lst))
         return ''.join(info)
