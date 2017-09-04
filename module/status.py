@@ -79,7 +79,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 continue
             request = valve.request(message, int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
-            connect = 'steam://connect/{}:{}'.format(config['IPserver'],config['QueryPort'])
+            ipaddress = socket.gethostbyname(socket.gethostname())
+            connect = 'steam://connect/{}:{}'.format(ipaddress,config['QueryPort'])
             listplayers = []
             players = rcon.rcon("listplayers").decode("utf-8")
             if players.find('No Players Connected') < 0:
