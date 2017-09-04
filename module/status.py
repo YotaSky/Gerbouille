@@ -45,9 +45,10 @@ class Status: # Définition des méthodes de fonction de Gerbouille
 
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def servers(self, listview=True):
+    def servers(self, message, listview=True):
         listmap = []
         namemap = []
+        ping = valve.ping(message, int(config['QueryPort']))
         num = 0
         for conf in self.etcconf:
             num += 1
@@ -61,7 +62,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             else:
                 up = '<Online>'
             name = config['SessionName']
-            listmap.append('{}. {} {} {}\n'.format(num,name,up,protect))
+            listmap.append('{}. {} {} {} {}\n'.format(num,name,up,ping,protect))
             namemap.append(conf.split('.')[0])
         if listview: 
             txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(listmap))

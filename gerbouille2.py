@@ -42,7 +42,7 @@ async def on_message(message):
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
 		Tools().logger(message, "!load")
-		await client.send_message(message.channel,"Load Average: "+str(os.getloadavg()))
+		await client.send_message(message.channel,"Load Average: "+str(os.getloadavg()))	
 
 	if message.content.startswith('!insulte'):
 		"""Scraping sur le site http://www.insultron.com"""
@@ -53,7 +53,7 @@ async def on_message(message):
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
-		servers = Status().servers()
+		servers = Status().servers(message)
 		await client.send_message(message.channel,servers)
 		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
 
