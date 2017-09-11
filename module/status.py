@@ -18,7 +18,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
 
     def __init__(self): # Construction des variables
         """Encore quelques attributs statique à rendre dynamique ou en fichier de conf """
-        self.folder = os.path.join(os.path.sep,'etc','gerbouille')
+        self.folder = os.path.join(os.path.sep,'etc','arkmanager','instances')
         self.message = []
         self.client = discord.Client()
         
