@@ -75,6 +75,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         info = []
         for conf in self.etcconf:
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
+            print (config)
             if self.checkrcon(config) != 0:
                 continue
             request = valve.request(message, int(config['QueryPort']))
