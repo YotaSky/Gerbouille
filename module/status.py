@@ -42,7 +42,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         """Fonction de vérification si instance en ligne via port TCP RCON"""
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         x.settimeout(10)
-        print (x.connect_ex((config['IPserver'],int(config['RCONPort']))))
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
     def servers(self, listview=True):
@@ -74,7 +73,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             print (config)
             if self.checkrcon(config) != 0:
                 continue
-            request = valve.request(message, int(config['QueryPort']))
+            request = valve.request(message, config['IPserver'], int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
             ipaddress = socket.gethostbyname(socket.gethostname())
             connect = 'steam://connect/{}:{}'.format(ipaddress,config['QueryPort'])
