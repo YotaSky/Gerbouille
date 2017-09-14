@@ -5,7 +5,7 @@
 
 import valve.source.a2s
 
-def request(message, ip, port):
+def request(message, (ip, port):
     server = valve.source.a2s.ServerQuerier(address=(ip, port), timeout = 5.0)
     name = server.info()["server_name"].format(message)    
     return name
