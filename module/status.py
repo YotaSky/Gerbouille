@@ -18,7 +18,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
 
     def __init__(self): # Construction des variables
         """Encore quelques attributs statique à rendre dynamique ou en fichier de conf """
-        self.folder = os.path.join(os.path.sep,'etc','arkmanager','instances')
+        self.folder = os.path.join(os.path.sep,'etc','gerbouille')
         self.message = []
         self.client = discord.Client()
         
@@ -52,16 +52,12 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
-            if config['Protect'] == "True":
-                protect = 'and <Lock>'
-            else:
-                protect = ''
             if self.checkrcon(config) != 0:
                 up = '**Offline**'
             else:
                 up = '<Online>'
             name = config['SessionName']
-            listmap.append('{}. {} {} {} {}\n'.format(num,name,up,ping,protect))
+            listmap.append('{}. {} {} {}\n'.format(num,name,up,ping))
             namemap.append(conf.split('.')[0])
         if listview: 
             txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(listmap))
