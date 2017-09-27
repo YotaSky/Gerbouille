@@ -42,8 +42,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         """Fonction de vérification si instance en ligne via port TCP RCON"""
         x = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         x.settimeout(10)
-        print (config['RCONPort'])
-        return x.connect_ex(config['RCONPort'])
+        return x.connect_ex((config['IPserver'],config['RCONPort']))
 
     def servers(self, listview=True):
         listmap = []
