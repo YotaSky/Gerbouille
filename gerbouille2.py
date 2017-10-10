@@ -68,6 +68,12 @@ async def on_message(message):
 		if user[1] == 'Yota':
 			await client.send_message(message.channel,'Ouais ta gueule !')
 
+	if message.content.startswith('vogle'):
+		"""Fonction indispensable pour un échange constructif et courtois"""
+		user = Tools().auth(message)
+		if user[1] == 'Yota':
+			await client.send_message(message.channel,"Vous êtes du vomi, vous êtes le niveau zéro de la vie sur Terre, vous n'êtes même pas humain bande d'enfoirés ! Donc fermez votre gueule !")
+
 	if message.content.startswith('!auth'):
 		"""Fonction de vérification des droits
 		Fichier /etc/gerbouille/users
