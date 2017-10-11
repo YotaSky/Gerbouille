@@ -73,7 +73,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             if self.checkrcon(config) != 0:
                 continue
             #request = valve.request(message, int(config['QueryPort']))
-            request = 'test'
+            request = valve.request(message, config['IPserver'], int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
             ipaddress = socket.gethostbyname(socket.gethostname())
             connect = 'steam://connect/{}:{}'.format(ipaddress,config['QueryPort'])
