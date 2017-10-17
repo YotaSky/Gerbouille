@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3
 #Bot Gerbouille Discord/ARK
 #France-Evolved https://discord.gg/gVsveNY
 #2017 By YotaSky https://github.com/YotaSky
