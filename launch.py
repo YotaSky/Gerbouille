@@ -54,7 +54,7 @@ async def on_message(message):
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
 		servers = Status().instances(message, True)
-		await client.send_message(message.channel,servers)
+		await client.send_message(message.channel,servers[0])
 		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
 		
@@ -74,7 +74,7 @@ async def on_message(message):
 					"```" \
 			.format(start="!start - Démarrer instance\n",
 					stop="!stop - Arrêter instance\n",
-					restart="!restart** - Redémarrer instance\n",
+					restart="!restart - Redémarrer instance\n",
 					saveworld="!saveworld - Sauvegarde Map\n",
 					wipedinos="!wipedinos - Détruire tous les dinos sauvages\n",
 					installmod="!installmod - Installer un nouveau Mod\n",
