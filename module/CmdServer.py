@@ -17,9 +17,25 @@ class CmdServer(object):
         self.folder = os.path.join(os.path.sep,config['arkserverroot'],'ShooterGame','Binaries','Linux','ShooterGameServer')
         self.pid_file = os.path.join(os.path.sep,'etc','gerbouille','{}.pid'.format(binascii.crc32(bytes(self.folder,encoding="UTF-8"))))
 
-    def choice(self, opt):
-        if opt == '!start':
-            return 'ok'
+    def admin(self, opt):
+        admin_msg = "{start}" \
+                    "{stop}" \
+                    "{restart}" \
+                    "{saveworld}" \
+                    "{wipedinos}" \
+                    "{installmod}" \
+                    "{removemod}" \
+                    "{backup}" \
+            .format(start="**!start** - Démarrer instance\n",
+                    stop="**!stop** - Arrêter instance\n",
+                    restart="**!restart** - Redémarrer instance [OFF]\n",
+                    saveworld="**!saveworld** - Sauvegarde Map [OFF]\n",
+                    wipedinos="**!wipedinos** - Détruire tous les dinos sauvages [OFF]\n",
+                    installmod="**!installmod** - Installer un nouveau Mod [OFF]\n",
+                    removemod="**!removemod** - Supprimer un Mod [OFF]\n",
+                    backup="**!backup** - Sauvegarde données Map [OFF]\n",
+                    )
+        return admin_msg
 
     def start(self):
         result = {}

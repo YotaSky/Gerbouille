@@ -44,24 +44,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         x.settimeout(10)
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    """def servers(sdelf, message, listview=True):
-        listmap = []
-        namemap = []
-        num = 0
-        for conf in self.etcconf:
-            num += 1
-            config = self.extract(os.path.join(os.path.sep,self.folder,conf))
-            if self.checkrcon(config) != 0:
-                up = '**Offline**'
-            else:
-                up = '<Online>'
-            name = valve.request(message, config['IPserver'], int(config['QueryPort']))
-            listmap.append('{}. {} {}\n'.format(num,name,up))
-            namemap.append(conf.split('.')[0])
-        if listview: 
-            txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(listmap))
-            return txt"""
-
     def instances(self, message, admin=False):
         """Liste des joueurs sur les instances ARK
         Recuperation de la liste des joueurs par map
