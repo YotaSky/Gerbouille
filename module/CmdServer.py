@@ -11,7 +11,7 @@ import signal
 import binascii
 
 class CmdServer(object):
-    def __init__(self, config, safe=False):
+    def __init__(self, config=False, safe=False):
         self.config = config
         self.safe = safe
         self.folder = os.path.join(os.path.sep,config['arkserverroot'],'ShooterGame','Binaries','Linux','ShooterGameServer')
