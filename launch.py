@@ -33,7 +33,7 @@ async def on_message(message):
 		Tools().logger(message, "!ark")
 		msg = Status().instances(message)
 		em = discord.Embed(title='Liste des survivant(e)s', 
-            description="Les serveurs affichés sont ceux en ligne, seul les noms steam sont consultables et non ceux InGame.",
+            description="Visitez notre site http://ark.france-evolved.team",
             colour=0xDEADBF, 
             author='Yota')
 		await client.send_message(message.channel, "", embed=em)
@@ -55,7 +55,7 @@ async def on_message(message):
 			return
 		servers = Status().instances(message, True)
 		await client.send_message(message.channel,servers)
-		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
+		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
 		launch = CmdServer().choice(msg.content)
