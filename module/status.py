@@ -73,9 +73,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if self.checkrcon(config) != 0:
-                up = '**Offline**'
+                up = b'**Offline**'
             else:
-                up = '<Online>'
+                up = b'<Online>'
             #request = valve.request(message, int(config['QueryPort']))
             request = valve.request(message, config['IPserver'], int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
@@ -92,7 +92,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ''
             #info.append('**{}** ({} ms - {}): {} survivant(s) en ligne {}\n'.format(config['SessionName'], round(float(ping)), version, str(len(listplayers)), lst))
             if admin is True:
-                info.append(b'```markdown\n#Liste des instances ARK\n{}. **{}** {} survivant(s) Connected {}\n```'.format(num, request, str(len(listplayers), up)))
+                info.append('```markdown\n#Liste des instances ARK\n{}. **{}** {} survivant(s) Connected {}\n```'.format(num, request, str(len(listplayers), up)))
             else:
                 info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
         return ''.join(info)
