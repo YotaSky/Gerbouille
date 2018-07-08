@@ -34,13 +34,12 @@ async def on_message(message):
 		msg = Status().instances(message)
 		await client.send_message(message.channel, msg)
 
-		txt = '```{}\n{} - {} Survivant(s) en Jeu\n\n{}```'.format(msg[0],msg[1],msg[2],''.join(msg[3]))
 		em = discord.Embed(title='Liste des serveurs France-Evolved', 
 			description="Visitez notre site http://ark.france-evolved.team",
 			colour=0xDEADBF, 
 			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
-		await client.send_message(message.channel, txt)
+		#await client.send_message(message.channel, txt)
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
