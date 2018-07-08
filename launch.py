@@ -32,7 +32,7 @@ async def on_message(message):
 		"""Récupération des informations serveur"""
 		Tools().logger(message, "!ark")
 		msg = Status().instances(message)
-		await client.send_message(message.channel, msg)
+		await client.send_message(message.channel, msg[0])
 
 		em = discord.Embed(title='Liste des serveurs France-Evolved', 
 			description="Visitez notre site http://ark.france-evolved.team",
