@@ -95,7 +95,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                         listplayers.append(i.split(',')[0].split('. ',1)[1])
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
-                lst = ''
+                lst = 'No Players Connected'
             play += len(listplayers)
             if admin is True:
                 info.append("{num}. " \
@@ -104,5 +104,5 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             name=request,
                             ))
             else:
-                info.append('+{} - {}\n--- Survivant(s) en ligne ({}) : {}\n\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```{}\n{} - {} Survivants en Jeu\n\n{}\n```'.format(mark,title,play,''.join(info))
+                info.append('+{} - {}\n--- Liste des Survivant(s) ({}): {}\n\n'.format(request, connect, str(len(listplayers)), lst))
+        return '```{}\n{} - {} Survivant(s) en Jeu\n\n{}\n```'.format(mark,title,play,''.join(info))
