@@ -69,6 +69,10 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         - Composition de la liste joueurs"""
         num = 0
         info = []
+        if admin is True:
+            mark = 'markdown'
+        else:
+            mark = 'diff'
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
@@ -76,7 +80,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 up = b'**Offline**'
             else:
                 up = b'<Online>'
-            #request = valve.request(message, int(config['QueryPort']))
             request = valve.request(message, config['IPserver'], int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)
             ipaddress = socket.gethostbyname(socket.gethostname())
@@ -90,15 +93,15 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
-            #info.append('**{}** ({} ms - {}): {} survivant(s) en ligne {}\n'.format(config['SessionName'], round(float(ping)), version, str(len(listplayers)), lst))
             if admin is True:
-                #info.append('{}. **{}** {} survivant(s) en ligne\n```'.format(num,request, str(len(listplayers))))
-                info.append("+{name} " \
+                info.append("{num}. " \
+                            "+{name} " \
                             "{connect} \n" \
                             "--- blabla \n" \
-                    .format(name=request,
+                    .format(num=num,
+                            name=request,
                             connect=connect
                             ))
             else:
                 info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```diff\n- ARK: Survival Evolved \n{}\n```'.format(''.join(info))
+        return '```{}\n- ARK: Survival Evolved \n{}\n```'.format(mark,''.join(info))
