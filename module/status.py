@@ -100,5 +100,5 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             connect=connect
                             ))
             else:
-                info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```diff\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(info))
+                info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n'.format(request, connect, str(len(listplayers)), lst))
+        return '```diff\n-Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(info))
