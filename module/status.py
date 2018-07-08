@@ -101,4 +101,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             ))
             else:
                 info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```diff{}```'.format(''.join(info))
+        return '```diff\n{}\n```'.format(''.join(info))
