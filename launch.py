@@ -54,8 +54,9 @@ async def on_message(message):
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
-		servers = Status().instances(message, True)
-		await client.send_message(message.channel,servers[0])
+		play,info = Status().instances(message)
+		txt = '```diff\n#Liste des instances à administrer -{} Survivant(s) en Jeu\n\n{}\n```'.format(play,''.join(info))
+		await client.send_message(message.channel,txt)
 		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
 		
