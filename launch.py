@@ -59,7 +59,7 @@ async def on_message(message):
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
         
         input_opt = "{start}" \
-        			"{stop}" \
+            		"{stop}" \
             		"{restart}" \
             		"{saveworld}" \
             		"{wipedinos}" \
@@ -72,8 +72,7 @@ async def on_message(message):
             		saveworld="!saveworld - Sauvegarde Map [OFF]\n",
             		wipedinos="!wipedinos - Détruire tous les dinos sauvages [OFF]\n",
             		installmod="!installmod - Installer un nouveau Mod [OFF]\n",
-            		removemod="!removemod - Supprimer un Mod [OFF]\n",
-            		backup="!backup - Sauvegarde données Map [OFF]\n",
+            		removemod="!removemod - Supprimer un Mod [OFF]\n",backup="!backup - Sauvegarde données Map [OFF]\n",
             		)
 
     	await client.send_message(message.channel,input_opt)
