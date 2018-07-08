@@ -97,7 +97,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ''
             if admin is True:
                 info.append("{num}. " \
-                            "{name} " \
+                            "{name} \n" \
                     .format(num=num,
                             name=request,
                             ))
