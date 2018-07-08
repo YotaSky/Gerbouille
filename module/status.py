@@ -75,7 +75,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             title = '#Liste des instances à administrer '
         else:
             mark = 'diff'
-            title = '- ARK: Survival Evolved - Cross-Travel'
+            title = '- ARK: Survival Evolved - Cross-Travel\n'
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
