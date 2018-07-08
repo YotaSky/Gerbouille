@@ -104,5 +104,13 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             name=request,
                             ))
             else:
-                info.append('+{} - {}\nListe des Survivant(s) ({}): {}\n\n'.format(request, connect, str(len(listplayers)), lst))
+                info.append("+{name} - "\
+                            "{connect}\n"\
+                            "Liste des Survivant(s) ({numplay}): "\
+                            "{listplay}\n\n"\
+                    .format(name=request, 
+                            connect=connect,
+                            numplay=str(len(listplayers)), 
+                            listplay=lst
+                            ))
         return '```{}\n{} - {} Survivant(s) en Jeu\n\n{}\n```'.format(mark,title,play,''.join(info))
