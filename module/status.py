@@ -95,4 +95,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             numplay=str(len(listplayers)), 
                             listplay=lst
                             ))
-        return ['```{}\n{} - {} Survivant(s) en Jeu\n\n```'.format(mark,title,play),info]
+        return play,info

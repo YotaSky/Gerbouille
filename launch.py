@@ -31,15 +31,14 @@ async def on_message(message):
 	if message.content.startswith('!ark'):
 		"""Récupération des informations serveur"""
 		Tools().logger(message, "!ark")
-		msg = Status().instances(message)
-		await client.send_message(message.channel, msg[0])
-
+		play,info = Status().instances(message)
+		txt = '```diff\n- ARK: Survival Evolved - Cross-Travel - {} Survivant(s) en Jeu\n\n{}\n```'.format(play,''.join(info))
 		em = discord.Embed(title='Liste des serveurs France-Evolved', 
 			description="Visitez notre site http://ark.france-evolved.team",
 			colour=0xDEADBF, 
 			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
-		#await client.send_message(message.channel, txt)
+		await client.send_message(message.channel, txt)
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
