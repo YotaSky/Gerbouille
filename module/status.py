@@ -101,4 +101,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             ))
             else:
                 info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```diff\n-Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(info))
+        return '```diff{}```'.format(''.join(info))
