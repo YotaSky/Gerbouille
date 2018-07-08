@@ -62,13 +62,15 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             txt = '```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}\n```'.format(''.join(listmap))
             return txt
 
-    def players(self,message):
+    def instances(self, message, admin=False):
         """Liste des joueurs sur les instances ARK
         Recuperation de la liste des joueurs par map
         - Verification de l'etat online/hors line
         - Composition de la liste joueurs"""
+        num = 0
         info = []
         for conf in self.etcconf:
+            num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
             if self.checkrcon(config) != 0:
                 continue
@@ -87,5 +89,8 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             else: 
                 lst = ''
             #info.append('**{}** ({} ms - {}): {} survivant(s) en ligne {}\n'.format(config['SessionName'], round(float(ping)), version, str(len(listplayers)), lst))
-            info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
+            if admin is True:
+                info.append('{} :: **{}** {} survivant(s) Connected\n'.format(num, request, str(len(listplayers))))
+            else:
+                info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
         return ''.join(info)

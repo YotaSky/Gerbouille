@@ -31,7 +31,7 @@ async def on_message(message):
 	if message.content.startswith('!ark'):
 		"""Récupération des informations serveur"""
 		Tools().logger(message, "!ark")
-		msg = Status().players(message)
+		msg = Status().instances(message)
 		em = discord.Embed(title='Liste des survivant(e)s', 
             description="Les serveurs affichés sont ceux en ligne, seul les noms steam sont consultables et non ceux InGame.",
             colour=0xDEADBF, 
@@ -53,7 +53,7 @@ async def on_message(message):
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
-		servers = Status().players(message)
+		servers = Status().instances(message, True)
 		await client.send_message(message.channel,servers)
 		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
 
