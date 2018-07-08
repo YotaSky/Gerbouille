@@ -76,7 +76,6 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 up = '**Offline**'
             else:
                 up = '<Online>'
-                continue
             #request = valve.request(message, int(config['QueryPort']))
             request = valve.request(message, config['IPserver'], int(config['QueryPort']))
             rcon = srcds.SourceRcon(config['IPserver'], int(config['RCONPort']), config['ServerAdminPassword'], 5)

@@ -32,7 +32,7 @@ async def on_message(message):
 		"""Récupération des informations serveur"""
 		Tools().logger(message, "!ark")
 		msg = Status().instances(message)
-		em = discord.Embed(title='Liste des survivant(e)s', 
+		em = discord.Embed(title='Liste des serveurs France-Evolved', 
             description="Visitez notre site http://ark.france-evolved.team",
             colour=0xDEADBF, 
             author='Yota')
