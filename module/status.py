@@ -69,12 +69,13 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         - Composition de la liste joueurs"""
         num = 0
         info = []
+        play = 0
         if admin is True:
             mark = 'markdown'
             title = '#Liste des instances à administrer '
         else:
             mark = 'diff'
-            title = '- ARK: Survival Evolved '
+            title = '- ARK: Survival Evolved - Cross-Travel'
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
@@ -95,6 +96,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ' ('+', '.join(listplayers)+')'
             else: 
                 lst = ''
+            play += len(listplayers)
             if admin is True:
                 info.append("{num}. " \
                             "{name} \n" \
@@ -103,4 +105,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                             ))
             else:
                 info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n\n'.format(request, connect, str(len(listplayers)), lst))
-        return '```{}\n{}\n{}\n```'.format(mark,title,''.join(info))
+        return '```{}\n{} <{} survivants>\n{}\n```'.format(mark,title,play,''.join(info))
