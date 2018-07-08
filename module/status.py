@@ -44,7 +44,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
         x.settimeout(10)
         return x.connect_ex((config['IPserver'],int(config['RCONPort'])))
 
-    def servers(self, listview=True):
+    def servers(self, message, listview=True):
         listmap = []
         namemap = []
         num = 0

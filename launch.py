@@ -53,12 +53,11 @@ async def on_message(message):
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
-		servers = Status().servers(message)
+		servers = Status().players(message)
 		await client.send_message(message.channel,servers)
 		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
 
 		msg = await client.wait_for_message(timeout=120.0, author=message.author)
-		await client.send_message(message.channel,msg.content)
 		launch = CmdServer().choice(msg.content)
 		await client.send_message(message.channel,launch)
 
