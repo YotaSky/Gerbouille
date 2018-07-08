@@ -37,7 +37,7 @@ async def on_message(message):
 			colour=0xDEADBF, 
 			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
-		await client.send_message(message.channel, msg[0])
+		await client.send_message(message.channel, msg)
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
