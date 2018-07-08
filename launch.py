@@ -53,7 +53,6 @@ async def on_message(message):
 		if user == None:
 			await client.send_message(message.channel,"Toi pas parler à Gerbouille, moi pas te connaitre ! {}".format(scraping.insultron()))
 			return
-		print('{}'.format(user)
 		servers = Status().servers(message)
 		await client.send_message(message.channel,servers)
 		await client.send_message(message.channel,"Quelle instance tu veux administrer ?")
