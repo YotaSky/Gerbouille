@@ -55,7 +55,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 up = '**Offline**'
             else:
                 up = '<Online>'
-            name = config['SessionName']
+            name = valve.request(message, config['IPserver'], int(config['QueryPort']))
             listmap.append('{}. {} {}\n'.format(num,name,up))
             namemap.append(conf.split('.')[0])
         if listview: 
