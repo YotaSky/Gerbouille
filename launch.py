@@ -32,12 +32,18 @@ async def on_message(message):
 		"""Récupération des informations serveur"""
 		Tools().logger(message, "!ark")
 		msg = Status().instances(message)
+		await client.send_message(message.channel, msg[0])
+		await client.send_message(message.channel, msg[1])
+		await client.send_message(message.channel, msg[2])
+		await client.send_message(message.channel, msg[3])
+
+		txt = '```{}\n{} - {} Survivant(s) en Jeu\n\n{}```'.format(msg[0],msg[1],msg[2],''.join(msg[3]))
 		em = discord.Embed(title='Liste des serveurs France-Evolved', 
 			description="Visitez notre site http://ark.france-evolved.team",
 			colour=0xDEADBF, 
 			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
-		await client.send_message(message.channel, '```{}\n{} - {} Survivant(s) en Jeu\n\n{}```'.format(msg[0],msg[1],msg[2],''.join(msg[3])))
+		await client.send_message(message.channel, txt)
 
 	if message.content.startswith('!load'):
 		"""Récupération du load average"""
