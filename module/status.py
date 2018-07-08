@@ -74,7 +74,7 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             title = '#Liste des instances à administrer '
         else:
             mark = 'diff'
-            tiitle = '- ARK: Survival Evolved '
+            title = '- ARK: Survival Evolved '
         for conf in self.etcconf:
             num += 1
             config = self.extract(os.path.join(os.path.sep,self.folder,conf))
@@ -97,12 +97,9 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 lst = ''
             if admin is True:
                 info.append("{num}. " \
-                            "+{name} " \
-                            "{connect} \n" \
-                            "--- blabla \n" \
+                            "{name} " \
                     .format(num=num,
                             name=request,
-                            connect=connect
                             ))
             else:
                 info.append('+{} \n--- Rejoindre : {}\n--- Survivant(s) en ligne ({}) : {}\n\n'.format(request, connect, str(len(listplayers)), lst))
