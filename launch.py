@@ -33,9 +33,9 @@ async def on_message(message):
 		Tools().logger(message, "!ark")
 		msg = Status().instances(message)
 		em = discord.Embed(title='Liste des serveurs France-Evolved', 
-            description="Visitez notre site http://ark.france-evolved.team",
-            colour=0xDEADBF, 
-            author='Yota')
+			description="Visitez notre site http://ark.france-evolved.team",
+			colour=0xDEADBF, 
+			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
 		await client.send_message(message.channel, msg)
 
@@ -57,26 +57,26 @@ async def on_message(message):
 		await client.send_message(message.channel,servers)
 		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
-        
-        input_opt = "{start}" \
-            		"{stop}" \
-            		"{restart}" \
-            		"{saveworld}" \
-            		"{wipedinos}" \
-            		"{installmod}" \
-            		"{removemod}" \
-            		"{backup}" \
-            .format(start="!start - Démarrer instance\n",
-            		stop="!stop - Arrêter instance\n",
-            		restart="!restart** - Redémarrer instance [OFF]\n",
-            		saveworld="!saveworld - Sauvegarde Map [OFF]\n",
-            		wipedinos="!wipedinos - Détruire tous les dinos sauvages [OFF]\n",
-            		installmod="!installmod - Installer un nouveau Mod [OFF]\n",
-            		removemod="!removemod - Supprimer un Mod [OFF]\n",backup="!backup - Sauvegarde données Map [OFF]\n",
-            		)
+		
+		input_opt = "{start}" \
+					"{stop}" \
+					"{restart}" \
+					"{saveworld}" \
+					"{wipedinos}" \
+					"{installmod}" \
+					"{removemod}" \
+					"{backup}" \
+			.format(start="!start - Démarrer instance\n",
+					stop="!stop - Arrêter instance\n",
+					restart="!restart** - Redémarrer instance [OFF]\n",
+					saveworld="!saveworld - Sauvegarde Map [OFF]\n",
+					wipedinos="!wipedinos - Détruire tous les dinos sauvages [OFF]\n",
+					installmod="!installmod - Installer un nouveau Mod [OFF]\n",
+					removemod="!removemod - Supprimer un Mod [OFF]\n",backup="!backup - Sauvegarde données Map [OFF]\n",
+					)
 
-    	await client.send_message(message.channel,input_opt)
-    	input_opt = await client.wait_for_message(timeout=120.0, author=message.author)
+		await client.send_message(message.channel,input_opt)
+		input_opt = await client.wait_for_message(timeout=120.0, author=message.author)
 
 		#launch = CmdServer().admin(msg.content)
 		#await client.send_message(message.channel,launch)
@@ -116,9 +116,9 @@ async def on_message(message):
 				group="Groupe de droits : **{}**".format(user[3]),
 				)
 		em = discord.Embed(title='Droits en base', 
-            description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
-            colour=0xDEADBF, 
-            author='Yota')
+			description="Informations de debug pour les informations utilisateurs qui permettra de configurer les accès Gerbouille",
+			colour=0xDEADBF, 
+			author='Yota')
 		await client.send_message(message.channel, "", embed=em)
 		await client.send_message(message.channel,msg)
 
