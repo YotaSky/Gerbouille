@@ -95,4 +95,4 @@ class Status: # Définition des méthodes de fonction de Gerbouille
                 info.append('```markdown\n#Liste des instances ARK (http://www.france-evolved.fr)\n{}. **{}** {} survivant(s) Connected {}\n```'.format(num, request, str(len(listplayers), up)))
             else:
                 info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
-        return ''.join(info)
+        return ''.join(info).encode("utf-8")
