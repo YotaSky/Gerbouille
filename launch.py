@@ -58,25 +58,25 @@ async def on_message(message):
 		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
         
-        msg = 	"{start}" \
-        		"{stop}" \
-            	"{restart}" \
-            	"{saveworld}" \
-            	"{wipedinos}" \
-            	"{installmod}" \
-            	"{removemod}" \
-            	"{backup}" \
-    		.format(start="**!start** - Démarrer instance\n",
-            	stop="**!stop** - Arrêter instance\n",
-            	restart="**!restart** - Redémarrer instance [OFF]\n",
-            	saveworld="**!saveworld** - Sauvegarde Map [OFF]\n",
-            	wipedinos="**!wipedinos** - Détruire tous les dinos sauvages [OFF]\n",
-            	installmod="**!installmod** - Installer un nouveau Mod [OFF]\n",
-            	removemod="**!removemod** - Supprimer un Mod [OFF]\n",
-            	backup="**!backup** - Sauvegarde données Map [OFF]\n",
-            	)
+        input_opt = "{start}" \
+        			"{stop}" \
+            		"{restart}" \
+            		"{saveworld}" \
+            		"{wipedinos}" \
+            		"{installmod}" \
+            		"{removemod}" \
+            		"{backup}" \
+            .format(start="!start - Démarrer instance\n",
+            		stop="!stop - Arrêter instance\n",
+            		restart="!restart** - Redémarrer instance [OFF]\n",
+            		saveworld="!saveworld - Sauvegarde Map [OFF]\n",
+            		wipedinos="!wipedinos - Détruire tous les dinos sauvages [OFF]\n",
+            		installmod="!installmod - Installer un nouveau Mod [OFF]\n",
+            		removemod="!removemod - Supprimer un Mod [OFF]\n",
+            		backup="!backup - Sauvegarde données Map [OFF]\n",
+            		)
 
-    	await client.send_message(message.channel,msg)
+    	await client.send_message(message.channel,input_opt)
     	input_opt = await client.wait_for_message(timeout=120.0, author=message.author)
 
 		#launch = CmdServer().admin(msg.content)
