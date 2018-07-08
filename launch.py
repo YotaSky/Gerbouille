@@ -58,14 +58,20 @@ async def on_message(message):
 		await client.send_message(message.channel,"Quelle instance veux-tu administrer ?")
 		input_srv = await client.wait_for_message(timeout=120.0, author=message.author)
 		
-		input_opt = "> {start}" \
+		input_opt = "```markdown\n" \
+					"# Liste des commandes\n\n" \
+					"> {start}" \
 					"> {stop}" \
 					"> {restart}" \
 					"> {saveworld}" \
 					"> {wipedinos}" \
 					"> {installmod}" \
 					"> {removemod}" \
-					"> {backup}" \
+					"> {backup}\n" \
+					"# Etat des commandes\n\n" \
+					"* Commande utilisable\n" \
+					"> Commande non utilisable\n" \
+					"```" \
 			.format(start="!start - Démarrer instance\n",
 					stop="!stop - Arrêter instance\n",
 					restart="!restart** - Redémarrer instance\n",
