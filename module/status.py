@@ -93,6 +93,15 @@ class Status: # Définition des méthodes de fonction de Gerbouille
             #info.append('**{}** ({} ms - {}): {} survivant(s) en ligne {}\n'.format(config['SessionName'], round(float(ping)), version, str(len(listplayers)), lst))
             if admin is True:
                 info.append('{}. **{}** {} survivant(s) en ligne\n```'.format(num,request, str(len(listplayers))))
+                arkmap =    "```markdown\n" \
+                            "+{name} " \
+                            "{connect} \n" \
+                            "--- blabla \n" \
+                            "```" \
+                    .format(name=request,
+                            connect=connect
+                            )
+                print arkmap
             else:
                 info.append('**{}** ({}): {} survivant(s) en ligne {}\n'.format(request, connect, str(len(listplayers)), lst))
         return ''.join(info)
